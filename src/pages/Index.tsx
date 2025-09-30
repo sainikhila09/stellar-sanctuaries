@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Rocket, Home, Cpu, Heart, Zap, Database, Wind, Shield } from "lucide-react";
@@ -10,6 +11,7 @@ import marsImage from "@/assets/mars-habitat.jpg";
 import expandableImage from "@/assets/expandable-habitat.jpg";
 
 const Index = () => {
+  const navigate = useNavigate();
   const [selectedModel, setSelectedModel] = useState<'sphere' | 'torus' | 'cylinder'>('sphere');
   const criticalFunctions = [
     {
@@ -85,9 +87,19 @@ const Index = () => {
           <p className="text-xl md:text-2xl mb-8 max-w-3xl mx-auto text-muted-foreground">
             Homes in Space: Engineering the Future of Human Exploration
           </p>
-          <Button size="lg" className="text-lg px-8 py-6">
-            Explore the Technology
-          </Button>
+          <div className="flex gap-4 justify-center flex-wrap">
+            <Button size="lg" className="text-lg px-8 py-6">
+              Explore the Technology
+            </Button>
+            <Button 
+              size="lg" 
+              variant="outline" 
+              className="text-lg px-8 py-6"
+              onClick={() => navigate('/designer')}
+            >
+              Open Layout Designer
+            </Button>
+          </div>
         </div>
 
         <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-background to-transparent"></div>
