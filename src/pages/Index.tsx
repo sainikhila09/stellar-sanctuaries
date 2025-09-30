@@ -1,12 +1,16 @@
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Rocket, Home, Cpu, Heart, Zap, Database, Wind, Shield } from "lucide-react";
+import HabitatModel3D from "@/components/HabitatModel3D";
+import ModelSelector from "@/components/ModelSelector";
 import heroImage from "@/assets/space-habitat-hero.jpg";
 import interiorImage from "@/assets/habitat-interior.jpg";
 import marsImage from "@/assets/mars-habitat.jpg";
 import expandableImage from "@/assets/expandable-habitat.jpg";
 
 const Index = () => {
+  const [selectedModel, setSelectedModel] = useState<'sphere' | 'torus' | 'cylinder'>('sphere');
   const criticalFunctions = [
     {
       icon: Wind,
@@ -87,6 +91,34 @@ const Index = () => {
         </div>
 
         <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-background to-transparent"></div>
+      </section>
+
+      {/* 3D Model Preview Section */}
+      <section className="py-24 bg-gradient-to-b from-background to-card/30">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-12">
+            <h2 className="text-4xl md:text-5xl font-bold mb-6">
+              Interactive 3D Models
+            </h2>
+            <p className="text-lg text-muted-foreground max-w-3xl mx-auto mb-8">
+              Explore different space habitat geometries in 3D. Click and drag to rotate, scroll to zoom.
+            </p>
+          </div>
+
+          <div className="max-w-5xl mx-auto mb-8">
+            <ModelSelector selectedModel={selectedModel} onModelChange={setSelectedModel} />
+          </div>
+
+          <div className="max-w-4xl mx-auto">
+            <HabitatModel3D habitatType={selectedModel} />
+          </div>
+
+          <div className="mt-8 text-center">
+            <p className="text-sm text-muted-foreground">
+              These models represent simplified concepts of actual space habitat designs being developed by space agencies worldwide.
+            </p>
+          </div>
+        </div>
       </section>
 
       {/* Overview Section */}
